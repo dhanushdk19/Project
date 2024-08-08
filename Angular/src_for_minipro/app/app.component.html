@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+  <body>
+    <h1 style="background-color: rgb(122, 122, 122,0.4);color: rgb(255, 255, 255,0.9);padding: 4px;border-radius: 10px;">Player Statistics Management System</h1>
+
+    <div class="div1">
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <form #myForm="ngForm">
+            <div class="form-group">
+              <label for="Employee Id">Player Id</label>
+              <input type="text" class="form-control" name="empId" #empId="ngModel" ngModel required pattern="[0-9]+"/>
+            </div>
+            <!-- Form validation for employee Id -->
+            <div *ngIf="empId.touched">
+              <div *ngIf="empId.errors?.['required']">
+                <b style="color: rgb(255, 0, 0);">Player Id Required.</b>
+              </div>
+              <div *ngIf="empId.errors?.['pattern']">
+                <font color="red"><b>Invalid Player Id.</b></font>
+            </div>
+            </div>
+            <div class="form-group">
+              <label for="Employee Name">Player Name</label>
+              <input type="text" class="form-control" name="empName" #empName="ngModel" ngModel required pattern="[a-z]+"/>
+            </div>
+            <!-- Form validation for employee Name -->
+            <div *ngIf="empName.touched">
+              <div *ngIf="empName.errors?.['required']">
+                <b style="color: rgb(255, 0, 0);">Player Name Required.</b>
+              </div>
+              <div *ngIf="empName.errors?.['pattern']">
+                <font color="red"><b>Invalid Player Name.</b></font>
+            </div>
+            </div>
+            <div class="form-group">
+              <label for="Employee Salary">Runs Scored</label>
+              <input type="text" class="form-control" name="empSalary" #empSalary="ngModel" ngModel required pattern="[0-9]+"/>
+            </div>
+            <!-- Form validation for employee Salary -->
+            <div *ngIf="empSalary.touched">
+              <div *ngIf="empSalary.errors?.['required']">
+                <b style="color: rgb(255, 0, 0);">Player Details Required.</b>
+              </div>
+              <div *ngIf="empSalary.errors?.['pattern']">
+                <b style="color: rgb(255, 0, 0);">Invalid Player Details.</b>
+            </div>
+            </div>
+            <button class="btn btn-success" (click)="insertEmployee(myForm.value)">New Player</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" (click)="updateEmployee(myForm.value)" >Update Player</button>&nbsp;&nbsp;
+            <button class="btn btn-danger" (click)="deleteEmployee(myForm.value)">Delete Player</button>&nbsp;&nbsp;<br><br>
+            <button class="btn btn-warning" (click)="findEmployee(myForm.value)" >Find Player</button>&nbsp;&nbsp;
+            <button class="btn btn-info" (click)="findAll()">All Players</button>
+            <div>
+              <h3 style="color: rgb(255, 255, 255);font-weight:600;">{{result}}</h3>
+              <!-- <h2>{{employee.id}} - {{employee.empName}} -{{employee.empSalary}}</h2> -->
+              </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="out">
+      <div style="text-align: center;background-color: rgb(0, 0, 0,0.5);color: aliceblue;padding:0.2px;border-radius: 20px;"><h2>Players List</h2></div>
+      
+      <h2 style="text-align: center;background-color: rgba(255, 255, 0, 0.7);color: rgb(67, 67, 67);">{{employee.id}} - {{employee.empName}} - {{employee.empSalary}}</h2><br>
+    <div style="width: 100%;" *ngIf="flag">
+        <table class="table" width="80%" align="center" class="table table-borderd">
+         <tr ><th>Player Id</th><th>Player Name</th><th>Runs Scored</th></tr> 
+          <tr *ngFor="let emp of employeeArr">
+              <td> {{emp.id}} </td><td> {{emp.empName}} </td><td> {{emp.empSalary}} </td>
+          </tr>
+       </table>
+       </div>
+
+      </div>
+
+</div>
+</body>
+</html>
